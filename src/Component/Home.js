@@ -51,6 +51,7 @@ const Home = () => {
                 src={vision}
                 alt="vision"
                 className="mt-4 vision-image"
+                style={{ width: window.screen.width < 700 && "90vw" }}
               ></img>
             </div>
           </div>
@@ -65,6 +66,7 @@ const Home = () => {
                   src={delivery}
                   alt="delivery"
                   className="delivery-image "
+                  style={{ width: window.screen.width < 700 && "70vw" }}
                 ></img>
               </div>
             </div>
