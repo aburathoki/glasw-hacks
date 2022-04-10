@@ -10,30 +10,30 @@ const Register = () => {
         </div>
         <div className="col col xl-6 col-lg-6 col-md-12 col-sm-12 mt-3">
           <form>
-            <div class="mb-3">
+            <div className="mb-3">
               <label htmlFor="name" className="form-label">
                 Name
               </label>
               <input type="text" className="form-control" />
             </div>
-            <div class="mb-3">
+            <div className="mb-3">
               <label htmlFor="Phone" className="form-label">
                 Phone Number
               </label>
               <input type="number" className="form-control" />
             </div>
-            <div class="mb-3">
+            <div className="mb-3">
               <label htmlFor="email" className="form-label">
                 Email
               </label>
               <input type="email" className="form-control" />
             </div>
-            <div class="mb-3">
-              <label htmlFor="text-arear" class="form-label">
+            <div className="mb-3">
+              <label htmlFor="text-arear" className="form-label">
                 Message
               </label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="exampleFormControlTextarea1"
                 rows="3"
               ></textarea>

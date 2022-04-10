@@ -1,8 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../Asset/logo.png";
 import "../App.css";
+import getCookie from "../cookies/getCookie";
+import deleteCookie from "../cookies/deleteCookie";
 const Navbar = () => {
+  const [login, setLogin] = useState(false);
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (getCookie("token")) {
+      setLogin(true);
+      var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      fetch(
+        "http://localhost:3000/api/v1/userinfo?token=" + getCookie("token"),
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.status == "success") {
+            setName(result.user.name);
+          }
+        })
+        .catch((error) => console.log("error", error));
+    }
+  }, []);
   return (
     <section className="p-4 ">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -57,10 +83,31 @@ const Navbar = () => {
                   </li>
                 </ul>
               </li>
+
+              {name.length > 0 && (
+                <li className="nav-item">
+                  <a className="nav-link">Hey! {name}</a>
+                </li>
+              )}
+
               <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  {`Login & Sign up`}
-                </Link>
+                {login ? (
+                  <a
+                    className="nav-link"
+                    onClick={() => {
+                      deleteCookie("token");
+                      setName("");
+                      navigate("/login");
+                      setLogin(false);
+                    }}
+                  >
+                    Logout
+                  </a>
+                ) : (
+                  <Link className="nav-link" to="/login">
+                    Login & Sign Up
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
